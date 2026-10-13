@@ -20,4 +20,4 @@ Jennie Magnusson
 
 Hanna Tetri
 
-Risto
+Risto Nordstet
