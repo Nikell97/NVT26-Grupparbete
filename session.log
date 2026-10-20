@@ -1,0 +1,43 @@
+
+========================================
+       NORDVIK NETWORK LAB
+========================================
+  Authorized access only
+========================================
+
+R-NORDVIK-1#
+R-NORDVIK-1#
+R-NORDVIK-1#config paging disable
+                   ^
+% Invalid input detected at '^' marker.
+
+R-NORDVIK-1#
+R-NORDVIK-1#show running-config | include hostname
+hostname R-NORDVIK-1
+R-NORDVIK-1#
+R-NORDVIK-1#show version | include Version
+Cisco IOS Software, C2951 Software (C2951-UNIVERSALK9-M), Version 15.5(3)M5, RELEASE SOFTWARE (fc1)
+ROM: System Bootstrap, Version 15.0(1r)M6, RELEASE SOFTWARE (fc1)
+R-NORDVIK-1#
+R-NORDVIK-1#show version | include Cisco CISCO
+Cisco CISCO2951/K9 (revision 1.1) with 2060288K/36864K bytes of memory.
+R-NORDVIK-1#
+R-NORDVIK-1#show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/0         unassigned      YES NVRAM  up                    up      
+GigabitEthernet0/0.3       unassigned      YES unset  up                    up      
+GigabitEthernet0/0.10      192.168.1.1     YES NVRAM  up                    up      
+GigabitEthernet0/0.20      192.168.1.65    YES NVRAM  up                    up      
+GigabitEthernet0/0.30      192.168.1.129   YES NVRAM  up                    up      
+GigabitEthernet0/0.99      192.168.1.193   YES NVRAM  up                    up      
+GigabitEthernet0/1         10.0.0.1        YES NVRAM  down                  down    
+GigabitEthernet0/1.1       unassigned      YES unset  down                  down    
+GigabitEthernet0/2         203.0.113.2     YES NVRAM  up                    up      
+NVI0                       unassigned      YES unset  administratively down down    
+R-NORDVIK-1#config paging enable
+                   ^
+% Invalid input detected at '^' marker.
+
+R-NORDVIK-1#
+R-NORDVIK-1#logout

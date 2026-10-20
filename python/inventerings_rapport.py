@@ -1,33 +1,68 @@
 from getpass import getpass
 from netmiko import ConnectHandler
+import paramiko
 import json
+import logging
 
-#dict containing the device information neccessary for ConnectHandler to establish ssh connection
+
+# Enable debugging
+logging.basicConfig(
+    filename="netmiko_debug.log",
+    level=logging.DEBUG,
+)
+
+# Allow legacy SSH algorithms for compatibility with the device.
+paramiko.Transport._preferred_kex = (
+    "diffie-hellman-group1-sha1",
+    *paramiko.Transport._preferred_kex,
+)
+
+paramiko.Transport._preferred_keys = (
+    "ssh-rsa",
+    *paramiko.Transport._preferred_keys,
+)
+
+paramiko.Transport._preferred_ciphers = (
+    "aes128-cbc",
+    *paramiko.Transport._preferred_ciphers,
+)
+
+# Device connection information
 device_dict = {
-    "device_type": "cisco_ios",
+    "device_type": "cisco_wlc",
     "host": "192.168.1.193",
     "username": "drift",
     "password": getpass("Enter device password: "),
+    "conn_timeout": 15,
+    "banner_timeout": 15,
+    "auth_timeout": 15,
+    "session_log": "session.log",
 }
 
-# establishes connection with device through ConnectHandler creates a new dict called report and saves the fetched values to it
-with ConnectHandler(**device_dict) as c:
-    report = {
-        "hostname": c.send_command("show running-config | include hostname"), # fetches only line with hostname from running config
-        "program_version": c.send_command("show version | include Version"), # fetches only line with program version
-        "device_model": c.send_command("show version | include Cisco CISCO"), # fetches only the line with device model
-        "interfaces": c.send_command("show ip interface brief"), # fetches information about device interfaces
-    }
+try:
+    with ConnectHandler(**device_dict) as c:
+        print("SSH connection successful!")
 
-# Loop to display all information from the report dict
-for key, value in report.items():
-    print(f"{key.replace('_', ' ').title()}:")
-    print(value)
-    print()
+        # Collect device information
+        report = {
+            "hostname": c.send_command("show running-config | include hostname"),
+            "program_version": c.send_command("show version | include Version"),
+            "device_model": c.send_command("show version | include Cisco CISCO"),
+            "interfaces": c.send_command("show ip interface brief"),
+        }
 
-# Save report dict as JSON file
-with open("rapport.json", "w", enconding="utf-8") as file:
-    json.dump(report, file, indent=4, ensure_ascii=False)
+    # Display report
+    for key, value in report.items():
+        print(f"{key.replace('_', ' ').title()}:")
+        print(value)
+        print()
 
-print("Report saved to rapport.json")
+    # Save JSON report
+    with open("rapport.json", "w", encoding="utf-8") as file:
+        json.dump(report, file, indent=4, ensure_ascii=False)
 
+    print("Report saved to rapport.json")
+
+except Exception as error:
+    print(f"Connection or execution failed: {type(error).__name__}: {error}")
+    print("Check netmiko_debug.log and session.log for details.")
