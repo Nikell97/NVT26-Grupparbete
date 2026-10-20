@@ -1,0 +1,4 @@
+namn,interface,status
+Router1,GigabitEthernet0/0,up
+Switch1,FastEthernet0/1,up
+Switch2,FastEthernet0/1,down
