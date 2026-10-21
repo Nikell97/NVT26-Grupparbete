@@ -51,6 +51,19 @@ try:
             "interfaces": c.send_command("show ip interface brief"),
         }
 
+
+
+
+
+
+
+
+
+
+
+
+    
+
     # Display report
     for key, value in report.items():
         print(f"{key.replace('_', ' ').title()}:")
