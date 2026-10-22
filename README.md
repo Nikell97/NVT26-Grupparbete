@@ -38,6 +38,7 @@ Frivillig utökning
 Flera enheter, jämförelse mot förra rapporten, flagga avvikande versioner, HTML-rapport eller JSON
 
 Hur vi andvänt oss av AI
+
 Vi har andvänt oss av chat-gpt som stöd under grupparbetet för att förstå Python koden, få hjälp med felsökning och hitta lösningar när vi har fastnat. Vi har även fått hjälp med kod förslag som vi sedan testat och anpassat till vårat program. AI har varit ett hjälpmedel för oss att lära oss att komma vidare i arbetet.
 
 # Gruppmedlemmar
