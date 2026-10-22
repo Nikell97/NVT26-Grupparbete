@@ -42,11 +42,11 @@ device_dict = {
     "session_log": "session.log",
 }
 
-try:
-    with ConnectHandler(**device_dict) as c:
+try: # Error handling
+    with ConnectHandler(**device_dict) as c: # Establishes ssh connection with netmiko's ConnectHandler function
         print("SSH connection successful!")
 
-        # Collect device information
+        # Collect's the device information
         report = {
             "hostname": c.send_command("show running-config | include hostname"),
             "program_version": c.send_command("show version | include Version"),
@@ -54,7 +54,7 @@ try:
             "interfaces": c.send_command("show ip interface brief"),
         }
 
-    # Martin
+    # Martin - If old report is saved as json loads the report and displays it for comparison
     if os.path.exists("rapport.json"):
         with open("rapport.json", "r", encoding="utf-8") as fil:
             rapport = json.load(fil)
@@ -80,7 +80,7 @@ try:
         print("Antal aktiva gränssnitt:", antal_up)
         print("Antal nere gränssnitt:  ", antal_down)
 
-    #Riso
+    #Riso - Displays the new report in terminal
     print("\n" + "=" * 100)
     print(" NY LIVE-RAPPORT (FRÅN ROUTER)".center(100))
     print("=" * 100)
@@ -104,19 +104,19 @@ try:
     print("Antal nere gränssnitt:  ", antal_down_ny)
     print("=" * 100 + "\n")
     
-    # Display report
+    # Old abbreviated code to display the report without counter of interfaces up/down
     """for key, value in report.items():
         print(f"{key.replace('_', ' ').title()}:")
         print(value)
         print()"""
 
     #Hanna
-    # Save JSON report
+    # Saves report as a json file called rapport.json
     with open("rapport.json", "w", encoding="utf-8") as file:
         json.dump(report, file, indent=4, ensure_ascii=False)
 
     print("Report saved to rapport.json")
 
-except Exception as error:
+except Exception as error: # If an error occurs in the try block enter the exception block and display the error message
     print(f"Connection or execution failed: {type(error).__name__}: {error}")
     print("Check netmiko_debug.log and session.log for details.")
