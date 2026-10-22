@@ -9,8 +9,8 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 ```
-Detta sätter upp en virtual environment för dependencies, så att de inte påverkar andra python projekt.
-Efter installation ställ in så att VS Code och Python använder rätt Interpreter
+Detta sätter upp en virtual environment för dependencies, så att de inte påverkar andra python projekt.  
+Efter installation ställ in så att VS Code och Python använder rätt Interpreter  
 Ctr + Shif + P --> Python: Select Interpreter --> Välj din virtual environment, ex på hur den ser ut: Python 3.147 .\venv\Scripts\python.exe (bör ligga under Workspaces inte Global)
 
 # Projekt
