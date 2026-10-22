@@ -1,6 +1,6 @@
 # NVT26-Grupparbete
 
-### Ställ in rätt Python environment
+# Ställ in rätt Python environment
 
 Kör följande kommandon i PowerShell från projektets directory:
 
